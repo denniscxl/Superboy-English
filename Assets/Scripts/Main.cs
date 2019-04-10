@@ -14,10 +14,14 @@ public class Main : MonoBehaviour
     private Button _nextBtn;
     [SerializeField]
     private Button _exitBtn;
+    [SerializeField]
+    private Text _time;
+    public InputField _eTime;
 
     private int count;
     private string[] files;
     private string path = "";
+    private float lastTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +38,13 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float _t = Time.time - lastTime;
+        if (_t > int.Parse(_eTime.text))
+        {
+            lastTime = Time.time;
+            Next();
+        }
+        _time.text = _t.ToString();
     }
 
     #region ButtonDelegate
